@@ -45,6 +45,9 @@ async function main() {
     // Hint: method `askQuestion()`
 
     // Your code here.
+    const tx = await quizContract.askQuestion();
+    const receipt = await tx.wait()
+
 
     // From the transaction receipt we can extract useful information, such as
     // as the question's text and id that were stored in the logs
@@ -60,17 +63,23 @@ async function main() {
 
     // Now YOU answer the question!
     // Capture user input from the terminal.
+    console.log("id: ", id)
+    console.log(text)
     const userAnswer = await getUserAnswer();
 
     // B. Send the answer to the smart contract.
     // Hint: method `answerQuestion`.
 
     // Your code here.
+    await quizContract.answerQuestion(id, userAnswer)
 
     // C. Optional. Verify that the answer is correctly stored.
     // Hint: method `getAnswer(questionId)`
 
     // Your code here.
+    const result = await quizContract.getAnswer(id)
+    console.log('answer is correct: ', result[1])
+
 }
 
 
